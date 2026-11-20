@@ -63,9 +63,9 @@ Ex-post NIP = reoffer spread − where the new bond trades after N days, adjuste
 | Step | What | Status |
 |---|---|---|
 | 0 | Data reconnaissance: sources, access, coverage (see `docs/data_reconnaissance.md`) | in progress |
-| 1 | EDGAR term-sheet discovery and parser → deal table (one row per tranche) | to do |
-| 2 | Treasury curves (FRED / Treasury) + market variables (FRED) | to do |
-| 3 | TRACE secondary history per CUSIP for issuer and peer curves | to do (access route open, see recon doc) |
+| 1 | EDGAR term-sheet discovery and parser → deal table (one row per tranche) | code written + unit-tested on synthetic term sheets; first live run pending (`scripts/build_deal_table.py`) |
+| 2 | Treasury curves (FRED / Treasury) + market variables (FRED, FINRA market breadth API) | to do |
+| 3 | TRACE secondary history per CUSIP for issuer and peer curves | blocked: FINRA site terms forbid scraping; needs licensed/academic access or scoped manual collection (see recon doc) |
 | 4 | Kalman filter for secondary spreads + issuer FV curves | to do |
 | 5 | NIP labels (ex-ante and ex-post) with per-deal uncertainty | to do |
 | 6 | NIP regression and out-of-sample evaluation | to do |

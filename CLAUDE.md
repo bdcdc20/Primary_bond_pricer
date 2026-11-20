@@ -17,4 +17,13 @@ A public-data new-issue pricer for USD bonds issued by European banks (Yankee FI
 - EDGAR requests: descriptive User-Agent with a real contact email, ≤10 req/s, cache everything under `data/raw/edgar/`.
 
 ## Where the project stands
-Step 0 (data reconnaissance) is in progress. Next is step 1: an EDGAR FWP discovery + parser producing one row per tranche. The TRACE access route is still open; see the recon doc before writing any TRACE collection code.
+- Step 1 code exists: `data/edgar.py` (search + cached download), `data/termsheet.py` (parser, side-by-side and sequential layouts), `data/issuers.py`, `scripts/build_deal_table.py`. Tests in `tests/` pass on synthetic fixtures; **it has not been run against live EDGAR yet**. Expect to extend `FIELD_PATTERNS` after the first run, using `parse_failures.csv`. Add a real-filing regression fixture for each layout fixed.
+- **Never write a TRACE scraper**: the FINRA site's User Agreement forbids automated collection. TRACE route options are in `docs/data_reconnaissance.md` §2.
+
+## Running
+```
+pip install -e ".[dev]"
+pytest
+export EDGAR_USER_AGENT="Name email@domain"
+python scripts/build_deal_table.py --start 2015-01-01
+```
